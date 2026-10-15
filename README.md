@@ -137,6 +137,31 @@ with Robolectric SDK 36; `app/build.gradle.kts` adds the `--add-opens` flags Rob
 Java 17+. Instrumented tests in `app/src/androidTest` (Room migration smoke test, quick-entry
 end-to-end) run on a connected device with `./gradlew connectedDebugAndroidTest`.
 
+## Verified on a device
+
+Checked on 15 Oct 2026 on a Samsung Galaxy A55 (Android 16, One UI) over USB with the debug build.
+`logcat -b crash` stayed empty for the whole session.
+
+- **Install and first run**: seeded Cash Wallet and Bank Account, empty dashboard, bottom navigation.
+- **Quick entry**: a Rs 250 Food & Dining expense typed on the keypad; the dashboard, account balance,
+  category donut and daily bar updated immediately.
+- **Widgets**: both pinned from More → Home-screen widgets through the system "Add to Home screen"
+  dialog. The Quick Expense widget showed the default account, four favourite categories and the
+  "Rs 200 · Transport & Fuel" preset; one tap on the preset flashed "Saved ✓" and the Account Balance
+  widget went from −Rs 250 to −Rs 450 within a second. "+ Add expense" opened the quick-entry activity.
+- **Reminder scheduling**: `dumpsys alarm` showed the single next-wake alarm for 22:30, first as an
+  inexact alarm (28-minute window) and, seconds after the "Alarms & reminders" permission was granted,
+  as an exact one (window 0). It was re-armed after uninstall/reinstall. Settings showed notifications
+  allowed, exact timing allowed, the battery-optimisation warning and the next reminder time.
+- **Daily reminder**: with no transaction recorded that day, the notification (channel `reminders_daily`,
+  actions "Add expense" and "Mark reviewed") was posted at 22:30:01, one second after the exact alarm,
+  and `dumpsys alarm` showed the single wakeup and the next wake re-armed for 22:30 the following day.
+- **Backup and restore**: `kharcha-backup-2026-10-15.zip` (format 1, 2 accounts, 25 categories,
+  2 transactions) was written through the system file picker. After `adb uninstall` and a fresh install
+  the archive validated, "Replace everything" required typing REPLACE, the report listed every row as
+  added with none invalid, and the dashboard matched the pre-uninstall state exactly.
+- **Detail and delete**: deleting both test transactions recomputed list totals and balances at once.
+
 ## Known limitations
 
 - No cloud sync; move data with a backup file.

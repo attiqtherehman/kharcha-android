@@ -1,5 +1,6 @@
 package com.attiqtherehman.kharcha.feature.dashboard
 
+import kotlin.math.roundToInt
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -197,7 +198,7 @@ fun DashboardScreen(
                                         )
                                         Spacer(Modifier.width(8.dp))
                                         Text(cs.category?.name ?: stringResource(R.string.uncategorised), style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f), maxLines = 1, overflow = TextOverflow.Ellipsis)
-                                        Text("${(cs.fraction * 100).toInt()}%", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        Text("${(cs.fraction * 100).roundToInt()}%", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                     }
                                 }
                             }
@@ -275,7 +276,7 @@ private fun PeriodSummaryRow(state: DashboardState) {
             s.cashFlow,
             signedAmountColor(s.cashFlow),
             Modifier.weight(1f),
-            footer = s.savingsRate?.let { stringResource(R.string.home_savings_rate, (it * 100).toInt()) },
+            footer = s.savingsRate?.let { stringResource(R.string.home_savings_rate, (it * 100).roundToInt()) },
         )
     }
 }

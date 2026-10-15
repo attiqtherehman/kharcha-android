@@ -127,6 +127,10 @@
     <string name="account_no_history">No transactions on this account yet.</string>
 
     <!-- Transactions -->
+    <plurals name="transactions_count">
+        <item quantity="one">%1$d transaction</item>
+        <item quantity="other">%1$d transactions</item>
+    </plurals>
     <string name="transactions_title">Transactions</string>
     <string name="transactions_empty_title">No transactions yet</string>
     <string name="transactions_empty_message">Tap + to record your first expense.</string>

@@ -38,6 +38,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -143,7 +144,7 @@ fun TransactionsScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text("${state.count} ${stringResource(R.string.nav_transactions).lowercase()}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(pluralStringResource(R.plurals.transactions_count, state.count, state.count), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     MoneyText(state.income, style = MaterialTheme.typography.labelLarge, color = KharchaTheme.colors.income, signed = true, hideZeroFraction = true)
                     MoneyText(-state.expenses, style = MaterialTheme.typography.labelLarge, color = KharchaTheme.colors.expense, hideZeroFraction = true)

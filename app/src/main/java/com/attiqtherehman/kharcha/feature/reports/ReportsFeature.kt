@@ -1,5 +1,6 @@
 package com.attiqtherehman.kharcha.feature.reports
 
+import kotlin.math.roundToInt
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -210,7 +211,7 @@ fun ReportsScreen(onBack: () -> Unit, viewModel: ReportsViewModel = hiltViewMode
                                         Stat(stringResource(R.string.home_net), state.summary.cashFlow, signedAmountColor(state.summary.cashFlow), null)
                                     }
                                     Text(
-                                        stringResource(R.string.reports_savings_rate) + ": " + (state.summary.savingsRate?.let { "${(it * 100).toInt()}%" } ?: "—") + " · " + stringResource(R.string.reports_vs_previous),
+                                        stringResource(R.string.reports_savings_rate) + ": " + (state.summary.savingsRate?.let { "${(it * 100).roundToInt()}%" } ?: "—") + " · " + stringResource(R.string.reports_vs_previous),
                                         style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 8.dp),
                                     )
                                 }
@@ -262,7 +263,7 @@ fun ReportsScreen(onBack: () -> Unit, viewModel: ReportsViewModel = hiltViewMode
                                     Spacer(Modifier.width(12.dp))
                                     Column(modifier = Modifier.weight(1f)) {
                                         Text(line.category?.name ?: stringResource(R.string.uncategorised), style = MaterialTheme.typography.bodyLarge)
-                                        Text("${(line.fraction * 100).toInt()}% · ${stringResource(R.string.reports_vs_previous)}: ${fmt.format(line.previous, hideZeroFraction = true)}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        Text("${(line.fraction * 100).roundToInt()}% · ${stringResource(R.string.reports_vs_previous)}: ${fmt.format(line.previous, hideZeroFraction = true)}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                     }
                                     MoneyText(line.amount, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, hideZeroFraction = true)
                                 }

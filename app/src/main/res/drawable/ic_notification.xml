@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="#FFFFFFFF">
+    <!-- wallet glyph, single colour as required for status-bar icons -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M5,6 h13 a2,2 0 0 1 2,2 v9 a2,2 0 0 1 -2,2 h-13 a2,2 0 0 1 -2,-2 v-9 a2,2 0 0 1 2,-2 z M14,11 h6 v5 h-6 a2.5,2.5 0 0 1 0,-5 z M15.5,13.5 m-1,0 a1,1 0 1 0 2,0 a1,1 0 1 0 -2,0" />
+</vector>

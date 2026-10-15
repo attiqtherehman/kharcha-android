@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kharcha</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_transactions">Transactions</string>
+    <string name="nav_accounts">Accounts</string>
+    <string name="nav_budgets">Budgets</string>
+    <string name="nav_more">More</string>
+    <string name="nav_reports">Reports</string>
+    <string name="nav_savings">Savings goals</string>
+    <string name="nav_reminders">Bills &amp; reminders</string>
+    <string name="nav_recurring">Recurring transactions</string>
+    <string name="nav_categories">Categories</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_backup">Backup &amp; restore</string>
+    <string name="nav_export">Export</string>
+    <string name="nav_import">Import CSV</string>
+    <string name="nav_about">About &amp; privacy</string>
+
+    <!-- Generic actions -->
+    <string name="action_add_expense">Add expense</string>
+    <string name="action_back">Back</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_ok">OK</string>
+    <string name="action_save">Save</string>
+    <string name="action_save_add_another">Save &amp; add another</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_duplicate">Duplicate</string>
+    <string name="action_archive">Archive</string>
+    <string name="action_unarchive">Unarchive</string>
+    <string name="action_add">Add</string>
+    <string name="action_done">Done</string>
+    <string name="action_retry">Retry</string>
+    <string name="action_search">Search</string>
+    <string name="action_filter">Filter</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_apply">Apply</string>
+    <string name="action_more">More</string>
+    <string name="action_close">Close</string>
+    <string name="action_continue">Continue</string>
+    <string name="action_open_settings">Open settings</string>
+    <string name="action_see_all">See all</string>
+    <string name="action_remove">Remove</string>
+    <string name="action_skip">Skip</string>
+    <string name="action_pause">Pause</string>
+    <string name="action_resume">Resume</string>
+    <string name="action_mark_paid">Mark paid</string>
+    <string name="action_previous">Previous</string>
+    <string name="action_next">Next</string>
+
+    <!-- Pickers -->
+    <string name="pick_account">Choose account</string>
+    <string name="pick_category">Choose category</string>
+    <string name="uncategorised">Uncategorised</string>
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="tomorrow">Tomorrow</string>
+
+    <!-- Account types -->
+    <string name="account_type_cash">Cash</string>
+    <string name="account_type_bank">Bank account</string>
+    <string name="account_type_savings">Savings</string>
+    <string name="account_type_digital_wallet">Digital wallet</string>
+    <string name="account_type_credit_card">Credit card</string>
+    <string name="account_type_other">Other</string>
+
+    <!-- Transaction types -->
+    <string name="type_income">Income</string>
+    <string name="type_expense">Expense</string>
+    <string name="type_transfer">Transfer</string>
+    <string name="type_refund">Refund</string>
+    <string name="type_adjustment">Adjustment</string>
+    <string name="transfer_kind_atm">ATM withdrawal</string>
+    <string name="transfer_kind_savings">Savings transfer</string>
+    <string name="transfer_kind_card_repayment">Card repayment</string>
+    <string name="transfer_kind_general">Transfer</string>
+
+    <!-- Home -->
+    <string name="home_toggle_amounts">Show or hide amounts</string>
+    <string name="home_budget_this_month">Budget this month</string>
+    <string name="home_budget_spent_of">%1$s spent of %2$s</string>
+    <string name="home_bills">Upcoming bills</string>
+    <string name="home_spending_by_category">Spending by category</string>
+    <string name="home_other">Other</string>
+    <string name="home_trend">Daily spending</string>
+    <string name="home_recent">Recent transactions</string>
+    <string name="home_expenses">Expenses</string>
+    <string name="home_net">Net</string>
+    <string name="home_savings_rate">%1$d%% saved</string>
+    <string name="budget_alert_title">%1$s budget: %2$d%% used</string>
+
+    <!-- Accounts -->
+    <string name="accounts_title">Accounts</string>
+    <string name="accounts_empty_title">No accounts yet</string>
+    <string name="accounts_empty_message">Add a cash wallet, bank account or card to start tracking balances.</string>
+    <string name="accounts_add">Add account</string>
+    <string name="accounts_edit">Edit account</string>
+    <string name="accounts_archived">Archived</string>
+    <string name="accounts_spendable">Available to spend</string>
+    <string name="accounts_savings">Savings</string>
+    <string name="accounts_debt">Card debt</string>
+    <string name="accounts_net_worth">Net worth</string>
+    <string name="account_name">Name</string>
+    <string name="account_type">Type</string>
+    <string name="account_currency">Currency</string>
+    <string name="account_opening_balance">Opening balance</string>
+    <string name="account_current_outstanding">Current outstanding (owed)</string>
+    <string name="account_credit_limit">Credit limit</string>
+    <string name="account_notes">Notes</string>
+    <string name="account_colour">Colour</string>
+    <string name="account_icon">Icon</string>
+    <string name="account_balance">Balance</string>
+    <string name="account_owed">Owed</string>
+    <string name="account_available_credit">Available credit</string>
+    <string name="account_over_limit">Over limit</string>
+    <string name="account_adjust_balance">Adjust balance</string>
+    <string name="account_adjust_balance_hint">Enter the actual balance; the difference is recorded as an auditable adjustment.</string>
+    <string name="account_fix_opening">Fix opening balance</string>
+    <string name="account_delete_blocked">This account has %1$d transactions. Archive it instead to keep history.</string>
+    <string name="account_delete_confirm">Delete this account? It has no transactions, so nothing else is affected.</string>
+    <string name="account_archive_confirm">Archive this account? Its history stays and it is hidden from pickers.</string>
+    <string name="account_opening_locked">Opening balance can only be edited directly while the account has no transactions. Use "Fix opening balance" to record a correction.</string>
+    <string name="account_history">History</string>
+    <string name="account_no_history">No transactions on this account yet.</string>
+
+    <!-- Transactions -->
+    <string name="transactions_title">Transactions</string>
+    <string name="transactions_empty_title">No transactions yet</string>
+    <string name="transactions_empty_message">Tap + to record your first expense.</string>
+    <string name="transactions_no_match">Nothing matches these filters.</string>
+    <string name="transactions_search_hint">Search payee, notes, tags…</string>
+    <string name="transaction_amount">Amount</string>
+    <string name="transaction_account">Account</string>
+    <string name="transaction_from_account">From account</string>
+    <string name="transaction_to_account">To account</string>
+    <string name="transaction_category">Category</string>
+    <string name="transaction_date">Date</string>
+    <string name="transaction_time">Time</string>
+    <string name="transaction_payee">Payee / merchant</string>
+    <string name="transaction_description">Description</string>
+    <string name="transaction_notes">Notes</string>
+    <string name="transaction_tags">Tags (comma separated)</string>
+    <string name="transaction_atm_fee">ATM / bank fee (optional)</string>
+    <string name="transaction_details">Transaction</string>
+    <string name="transaction_record_refund">Record refund</string>
+    <string name="transaction_refund_of">Refund of %1$s</string>
+    <string name="transaction_linked_fee">Linked fee</string>
+    <string name="transaction_linked_transfer">Linked transfer</string>
+    <string name="transaction_refunds">Refunds</string>
+    <string name="transaction_delete_confirm">Delete this transaction? Account balances update immediately.</string>
+    <string name="transaction_delete_with_linked">Also delete the %1$d linked record(s)</string>
+    <string name="transaction_saved">Saved</string>
+    <string name="transaction_deleted">Deleted</string>
+    <string name="transaction_more_fields">Payee, notes, tags</string>
+    <string name="transaction_daily_total">Total</string>
+    <string name="error_amount_required">Enter an amount greater than zero</string>
+    <string name="error_account_required">Choose an account</string>
+    <string name="error_same_account">Choose two different accounts</string>
+    <string name="error_currency_mismatch">Both accounts must use the same currency</string>
+    <string name="error_refund_exceeds">Refund cannot exceed the remaining %1$s</string>
+    <string name="error_generic">Something went wrong: %1$s</string>
+    <string name="error_archived_account">That account is archived</string>
+
+    <!-- Filters -->
+    <string name="filter_title">Filters</string>
+    <string name="filter_types">Types</string>
+    <string name="filter_accounts">Accounts</string>
+    <string name="filter_categories">Categories</string>
+    <string name="filter_period">Period</string>
+    <string name="period_today">Today</string>
+    <string name="period_this_week">This week</string>
+    <string name="period_this_month">This month</string>
+    <string name="period_last_month">Last month</string>
+    <string name="period_this_year">This year</string>
+    <string name="period_custom">Custom</string>
+    <string name="period_all">All time</string>
+    <string name="period_from">From</string>
+    <string name="period_to">To</string>
+
+    <!-- Quick entry -->
+    <string name="quick_entry_title">Quick expense</string>
+    <string name="quick_entry_favourites">Favourites</string>
+    <string name="quick_entry_recent">Recent</string>
+    <string name="quick_entry_all_categories">All categories</string>
+    <string name="quick_entry_saved">Expense saved</string>
+    <string name="quick_entry_income">Income</string>
+    <string name="quick_entry_expense">Expense</string>
+
+    <!-- Budgets -->
+    <string name="budgets_title">Budgets</string>
+    <string name="budgets_overall">Monthly budget</string>
+    <string name="budgets_overall_hint">Total spending limit for the month, across all categories.</string>
+    <string name="budgets_savings_target">Savings target</string>
+    <string name="budgets_savings_target_hint">Amount you aim to move into savings accounts this month.</string>
+    <string name="budgets_set_overall">Set monthly budget</string>
+    <string name="budgets_category_budgets">Category budgets</string>
+    <string name="budgets_add_category">Add category budget</string>
+    <string name="budgets_copy_previous">Copy from previous month</string>
+    <string name="budgets_copied">Copied %1$d budget line(s)</string>
+    <string name="budgets_nothing_to_copy">No earlier month has budgets</string>
+    <string name="budgets_empty_title">No budgets for this month</string>
+    <string name="budgets_empty_message">Set a monthly limit or add category budgets to track spending against a plan.</string>
+    <string name="budgets_remaining">%1$s left</string>
+    <string name="budgets_over_by">Over by %1$s</string>
+    <string name="budgets_spent_of">%1$s of %2$s</string>
+    <string name="budgets_saved_of">%1$s saved of %2$s</string>
+    <string name="budgets_remove_confirm">Remove this category budget?</string>
+    <string name="budgets_all_categories_budgeted">Every expense category already has a budget this month.</string>
+
+    <!-- Savings goals -->
+    <string name="savings_title">Savings goals</string>
+    <string name="savings_add">New goal</string>
+    <string name="savings_edit">Edit goal</string>
+    <string name="savings_empty_title">No savings goals yet</string>
+    <string name="savings_empty_message">Create a goal like Emergency Fund, Car or Plot and track progress toward it.</string>
+    <string name="savings_target">Target amount</string>
+    <string name="savings_target_date">Target date (optional)</string>
+    <string name="savings_linked_account">Linked savings account (optional)</string>
+    <string name="savings_linked_hint">When linked, progress is the account balance. Otherwise progress is the sum of contributions you log here.</string>
+    <string name="savings_no_linked_account">Not linked</string>
+    <string name="savings_add_contribution">Add contribution</string>
+    <string name="savings_contribution_from">Transfer from account (optional)</string>
+    <string name="savings_contributions">Contributions</string>
+    <string name="savings_remaining">%1$s to go</string>
+    <string name="savings_reached">Goal reached</string>
+    <string name="savings_by_date">by %1$s</string>
+    <string name="savings_mark_complete">Mark complete</string>
+    <string name="savings_mark_active">Mark active</string>
+    <string name="savings_delete_confirm">Delete this goal and its contribution history? Linked account transactions are kept.</string>
+    <string name="savings_explainer">Net savings = income − expenses. Account balance = money held in a savings account. Goal progress = what is earmarked for this goal. Transfers into savings are never counted as expenses.</string>
+    <string name="savings_completed">Completed</string>
+
+    <!-- Reminders -->
+    <string name="reminders_title">Bills &amp; reminders</string>
+    <string name="reminders_add">New reminder</string>
+    <string name="reminders_edit">Edit reminder</string>
+    <string name="reminders_tab_upcoming">Upcoming</string>
+    <string name="reminders_tab_paused">Paused</string>
+    <string name="reminders_tab_history">History</string>
+    <string name="reminders_empty_title">No reminders yet</string>
+    <string name="reminders_empty_message">Add electricity, gas, internet, rent, instalments or any payment you do not want to miss.</string>
+    <string name="reminder_title">Title</string>
+    <string name="reminder_amount">Amount (optional)</string>
+    <string name="reminder_due_date">Due date</string>
+    <string name="reminder_time">Reminder time</string>
+    <string name="reminder_repeat">Repeat</string>
+    <string name="reminder_repeat_none">Does not repeat</string>
+    <string name="reminder_repeat_daily">Daily</string>
+    <string name="reminder_repeat_weekly">Weekly</string>
+    <string name="reminder_repeat_monthly">Monthly</string>
+    <string name="reminder_repeat_yearly">Yearly</string>
+    <string name="reminder_every">Every</string>
+    <string name="reminder_end_date">End date (optional)</string>
+    <string name="reminder_advance">Remind me</string>
+    <string name="reminder_advance_on_day">On the day</string>
+    <string name="reminder_advance_days_before">%1$d day(s) before</string>
+    <string name="reminder_category">Category (optional)</string>
+    <string name="reminder_account">Pay from account (optional)</string>
+    <string name="reminder_due">Due %1$s</string>
+    <string name="reminder_overdue_since">Overdue since %1$s</string>
+    <string name="reminder_paid_on">Paid %1$s</string>
+    <string name="reminder_mark_paid_title">Mark as paid</string>
+    <string name="reminder_create_expense">Record an expense transaction</string>
+    <string name="reminder_already_paid">This occurrence is already marked as paid.</string>
+    <string name="reminder_payment_history">Payment history</string>
+    <string name="reminder_no_payments">No payments recorded yet.</string>
+    <string name="reminder_next_due">Next due %1$s</string>
+    <string name="reminder_delete_confirm">Delete this reminder and its payment history? Recorded expense transactions are kept.</string>
+    <string name="reminder_skip_confirm">Skip this occurrence without recording a payment?</string>
+    <string name="reminder_completed">Completed</string>
+    <string name="reminder_paused">Paused</string>
+
+    <!-- Recurring transactions -->
+    <string name="recurring_title">Recurring transactions</string>
+    <string name="recurring_add">New recurring transaction</string>
+    <string name="recurring_edit">Edit recurring transaction</string>
+    <string name="recurring_empty_title">No recurring transactions</string>
+    <string name="recurring_empty_message">Set up salary, rent or subscriptions once; each occurrence is recorded automatically on its date, never twice.</string>
+    <string name="recurring_name">Name</string>
+    <string name="recurring_start_date">First occurrence</string>
+    <string name="recurring_time">Time of day</string>
+    <string name="recurring_active">Active</string>
+    <string name="recurring_next">Next: %1$s</string>
+    <string name="recurring_materialized">%1$d recorded so far</string>
+    <string name="recurring_backfill_warning">The first occurrence is in the past: %1$d past occurrence(s) will be recorded now.</string>
+    <string name="recurring_delete_confirm">Delete this rule? Transactions already recorded are kept.</string>
+
+    <!-- Daily reminder / missed days -->
+    <string name="daily_reminder_title">Daily expense reminder</string>
+    <string name="daily_reminder_text">Did you record today\'s expenses?</string>
+    <string name="daily_reminder_action_add">Add expense</string>
+    <string name="daily_reminder_action_reviewed">Mark reviewed</string>
+    <string name="missed_days_title">Missed days</string>
+    <string name="missed_days_message">Days in the last %1$d days with no transactions and not marked as reviewed.</string>
+    <string name="missed_days_none">Nothing missed. Every day is covered.</string>
+    <string name="missed_days_mark_reviewed">Reviewed</string>
+    <string name="missed_days_add_expense">Add</string>
+    <string name="notification_channel_daily">Daily expense reminder</string>
+    <string name="notification_channel_bills">Bills &amp; payments</string>
+    <string name="bill_notification_title">%1$s due %2$s</string>
+    <string name="bill_notification_text">Amount: %1$s</string>
+    <string name="bill_notification_action_paid">Mark paid</string>
+    <string name="bill_notification_action_open">Open</string>
+
+    <!-- Reports -->
+    <string name="reports_title">Reports</string>
+    <string name="reports_tab_overview">Overview</string>
+    <string name="reports_tab_categories">Categories</string>
+    <string name="reports_tab_accounts">Accounts</string>
+    <string name="reports_income_vs_expenses">Income vs expenses</string>
+    <string name="reports_monthly_trend">Monthly expenses</string>
+    <string name="reports_vs_previous">vs previous period</string>
+    <string name="reports_budget_performance">Budget performance</string>
+    <string name="reports_upcoming_obligations">Upcoming obligations (30 days)</string>
+    <string name="reports_cash_flow">Cash flow</string>
+    <string name="reports_savings_rate">Savings rate</string>
+    <string name="reports_no_data">No data for this period.</string>
+    <string name="reports_transfers_note">Transfers between your own accounts are not counted as income or expenses.</string>
+
+    <!-- Categories -->
+    <string name="categories_title">Categories</string>
+    <string name="categories_add">New category</string>
+    <string name="categories_edit">Edit category</string>
+    <string name="categories_expense">Expense categories</string>
+    <string name="categories_income">Income categories</string>
+    <string name="category_name">Name</string>
+    <string name="category_favourite">Show in quick entry favourites</string>
+    <string name="category_merge_into">Merge into another category</string>
+    <string name="category_merge_confirm">Move every transaction, budget and reminder from "%1$s" to "%2$s" and delete "%1$s"?</string>
+    <string name="category_delete_blocked">"%1$s" is used by %2$d records. Archive it to hide it, or merge it into another category.</string>
+    <string name="category_delete_confirm">Delete this category? It is not used anywhere.</string>
+    <string name="category_archived">Archived</string>
+    <string name="category_reorder_hint">Use the arrows to reorder.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_general">General</string>
+    <string name="settings_default_account">Default account for new expenses</string>
+    <string name="settings_base_currency">Base currency</string>
+    <string name="settings_number_grouping">Number grouping</string>
+    <string name="settings_grouping_standard">Standard (1,250,000)</string>
+    <string name="settings_grouping_south_asian">South Asian (12,50,000)</string>
+    <string name="settings_week_start">Week starts on</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_theme_system">System</string>
+    <string name="settings_theme_light">Light</string>
+    <string name="settings_theme_dark">Dark</string>
+    <string name="settings_dynamic_color">Use wallpaper colours (Android 12+)</string>
+    <string name="settings_reminders">Reminders &amp; notifications</string>
+    <string name="settings_daily_reminder">Daily expense reminder</string>
+    <string name="settings_daily_reminder_time">Reminder time</string>
+    <string name="settings_notifications_allowed">Notifications allowed</string>
+    <string name="settings_notifications_blocked">Notifications are blocked. Reminders cannot be shown.</string>
+    <string name="settings_exact_alarms_allowed">Exact timing allowed</string>
+    <string name="settings_exact_alarms_denied">Exact timing not allowed: reminders arrive around the set time, possibly later. Tap to allow.</string>
+    <string name="settings_battery_optimised">Battery optimisation is on for Kharcha. Some phones delay or drop reminders; tap to review.</string>
+    <string name="settings_battery_unrestricted">Battery optimisation is off for Kharcha</string>
+    <string name="settings_next_reminder">Next reminder: %1$s</string>
+    <string name="settings_no_reminder_scheduled">No reminder scheduled</string>
+    <string name="settings_budget_warnings">Budget warnings</string>
+    <string name="settings_budget_warn_at">Warn at %1$d%%</string>
+    <string name="settings_security">Security</string>
+    <string name="settings_app_lock">App lock</string>
+    <string name="settings_app_lock_summary">Require your fingerprint, face, device PIN or a Kharcha PIN to open the app.</string>
+    <string name="settings_app_lock_timeout">Lock after</string>
+    <string name="settings_lock_immediately">Immediately</string>
+    <string name="settings_lock_after_seconds">%1$d seconds</string>
+    <string name="settings_lock_after_minutes">%1$d minute(s)</string>
+    <string name="settings_set_pin">Set Kharcha PIN</string>
+    <string name="settings_change_pin">Change Kharcha PIN</string>
+    <string name="settings_use_biometrics">Use fingerprint / face / device credential</string>
+    <string name="settings_data">Data</string>
+    <string name="settings_widgets">Home-screen widgets</string>
+    <string name="settings_widget_presets">Quick-save presets</string>
+    <string name="settings_widget_presets_summary">One-tap amounts shown in the Quick Expense widget.</string>
+    <string name="settings_add_widget">Add widget to home screen</string>
+    <string name="settings_privacy_note">All data stays on this phone. There is no account, no server and no Internet permission. The database is not encrypted; the app lock only guards the screen. Backup files contain your full financial history, so store them carefully.</string>
+    <string name="settings_last_backup">Last backup: %1$s</string>
+    <string name="settings_no_backup_yet">No backup yet</string>
+
+    <!-- App lock -->
+    <string name="lock_title">Kharcha is locked</string>
+    <string name="lock_unlock">Unlock</string>
+    <string name="lock_enter_pin">Enter PIN</string>
+    <string name="lock_wrong_pin">Wrong PIN</string>
+    <string name="lock_locked_out">Too many attempts. Try again in %1$d seconds.</string>
+    <string name="lock_use_pin">Use Kharcha PIN</string>
+    <string name="lock_use_biometrics">Use fingerprint / face</string>
+    <string name="lock_set_pin_title">Set a 4 to 8 digit PIN</string>
+    <string name="lock_confirm_pin">Confirm PIN</string>
+    <string name="lock_pin_mismatch">PINs do not match</string>
+    <string name="lock_pin_too_short">PIN must be 4 to 8 digits</string>
+    <string name="lock_prompt_title">Unlock Kharcha</string>
+    <string name="lock_prompt_subtitle">Confirm it is you</string>
+    <string name="lock_recovery_hint">PIN forgotten or unavailable? Unlock with your device credential, then set a new PIN.</string>
+
+    <!-- Backup / export / import -->
+    <string name="backup_title">Backup &amp; restore</string>
+    <string name="backup_create">Create backup file</string>
+    <string name="backup_create_summary">Saves everything (accounts, transactions, budgets, goals, reminders, settings, receipts) into one .zip you can copy to another phone.</string>
+    <string name="backup_restore">Restore from backup file</string>
+    <string name="backup_restore_summary">Choose a Kharcha backup .zip. It is checked completely before anything changes.</string>
+    <string name="backup_sensitive_note">A backup contains your complete financial history. Keep it somewhere private.</string>
+    <string name="backup_validating">Checking backup…</string>
+    <string name="backup_writing">Writing backup…</string>
+    <string name="backup_restoring">Restoring…</string>
+    <string name="backup_done">Backup saved</string>
+    <string name="backup_invalid">This file is not a valid Kharcha backup: %1$s</string>
+    <string name="backup_newer_version">This backup was made with a newer version of Kharcha. Update the app first.</string>
+    <string name="backup_summary_title">Backup contents</string>
+    <string name="backup_created_at">Created %1$s</string>
+    <string name="backup_mode_replace">Replace everything</string>
+    <string name="backup_mode_replace_summary">Deletes all current records and restores the backup exactly.</string>
+    <string name="backup_mode_merge">Merge into current data</string>
+    <string name="backup_mode_merge_summary">Keeps current records; adds records from the backup by ID.</string>
+    <string name="backup_merge_policy">If a record already exists</string>
+    <string name="backup_merge_skip">Keep mine (skip)</string>
+    <string name="backup_merge_newer">Use whichever was edited last</string>
+    <string name="backup_merge_overwrite">Use the backup\'s version</string>
+    <string name="backup_replace_warning">This will permanently delete every account, transaction, budget, goal and reminder on this phone and replace them with the backup. Type REPLACE to confirm.</string>
+    <string name="backup_result_title">Restore complete</string>
+    <string name="backup_result_line">%1$s: %2$d added, %3$d updated, %4$d skipped, %5$d invalid</string>
+    <string name="backup_invalid_rows">Rows that could not be imported</string>
+    <string name="export_title">Export</string>
+    <string name="export_what">What to export</string>
+    <string name="export_format">Format</string>
+    <string name="export_range">Date range</string>
+    <string name="export_all_transactions">All transactions</string>
+    <string name="export_income">Income</string>
+    <string name="export_expenses">Expenses</string>
+    <string name="export_transfers">Transfers</string>
+    <string name="export_accounts">Accounts</string>
+    <string name="export_budgets">Budgets</string>
+    <string name="export_goals">Savings goals</string>
+    <string name="export_reminders">Bill reminders</string>
+    <string name="export_payments">Payment history</string>
+    <string name="export_everything_xlsx">Everything (one sheet per type)</string>
+    <string name="export_done">Exported</string>
+    <string name="import_title">Import transactions from CSV</string>
+    <string name="import_pick_file">Choose CSV file</string>
+    <string name="import_preview">Preview</string>
+    <string name="import_rows_valid">%1$d rows ready, %2$d with errors</string>
+    <string name="import_create_missing">Create missing accounts and categories by name</string>
+    <string name="import_confirm">Import %1$d rows</string>
+    <string name="import_done">Imported %1$d transactions</string>
+    <string name="import_format_hint">Expected columns: date, type, amount, account, category, to_account, payee, description, notes, tags. Dates as yyyy-MM-dd. Type is INCOME, EXPENSE or TRANSFER.</string>
+
+    <!-- About -->
+    <string name="about_title">About Kharcha</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_privacy_title">Privacy</string>
+    <string name="about_limitations_title">Known limitations</string>
+    <string name="about_limitations">• No cloud sync: move data between phones with a backup file.\n• The database is not encrypted; the app lock protects the screen only.\n• Reminder timing depends on Android\'s exact-alarm permission and your phone\'s battery settings.\n• Widgets cannot take typed input; tapping them opens quick entry.\n• Only CSV import is supported (plus full backup restore).</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_notifications_title">Allow notifications?</string>
+    <string name="onboarding_notifications_text">Kharcha reminds you at 10:30 PM to record the day\'s expenses and alerts you before bills are due. No other notifications are sent.</string>
+    <string name="onboarding_allow">Allow</string>
+    <string name="onboarding_not_now">Not now</string>
+
+    <!-- Widgets -->
+    <string name="widget_quick_expense_name">Quick expense</string>
+    <string name="widget_quick_expense_desc">Record an expense in seconds, straight from the home screen.</string>
+    <string name="widget_balance_name">Account balances</string>
+    <string name="widget_balance_desc">Your cash, bank and total available balance at a glance.</string>
+    <string name="widget_add_expense">Add expense</string>
+    <string name="widget_saved">Saved ✓</string>
+    <string name="widget_tap_to_set_up">Tap to set up</string>
+    <string name="widget_updated_at">Updated %1$s</string>
+    <string name="widget_total_available">Available</string>
+    <string name="widget_config_title">Account balance widget</string>
+    <string name="widget_config_accounts">Accounts to show</string>
+    <string name="widget_config_hide_amounts">Hide amounts (show ••••)</string>
+    <string name="widget_presets_title">Quick-save presets</string>
+    <string name="widget_presets_empty">No presets yet. Add amounts you record often, e.g. Rs 200 Transport.</string>
+    <string name="widget_preset_add">Add preset</string>
+    <string name="widget_preset_label">Label (optional)</string>
+</resources>

@@ -89,13 +89,6 @@ android {
         unitTests.isIncludeAndroidResources = true
         unitTests.isReturnDefaultValues = true
     }
-
-    lint {
-        // lintVitalAnalyzeRelease crashes inside lint's Kotlin K2 resolver on BackupScreen.kt
-        // ("Error during resolving call class KtNameReferenceExpression"), which would block every
-        // release build. Lint still runs on demand with `gradle lint`; release builds do not wait for it.
-        checkReleaseBuilds = false
-    }
 }
 
 room {

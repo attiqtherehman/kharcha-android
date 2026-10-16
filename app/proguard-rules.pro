@@ -37,9 +37,12 @@
 
 # --- Glance (home-screen widgets) -----------------------------------------------------------------
 # Receivers are declared in the manifest. ActionCallback implementations are instantiated by
-# reflection from the class name stored in the widget's PendingIntent, and Glance records provider
-# class names in its own DataStore to map widgets back to their GlanceAppWidget.
--keep public class * extends androidx.glance.appwidget.action.ActionCallback
+# reflection (Class.forName(name).getDeclaredConstructor().newInstance()) from the class name stored
+# in the widget's PendingIntent. Glance's own rule keeps the class but not its constructor, and R8
+# full mode strips an unreferenced no-arg constructor, which made the widget's one-tap preset fail
+# with NoSuchMethodException on the device; keep the constructor explicitly. Glance also records
+# provider class names in its own DataStore to map widgets back to their GlanceAppWidget.
+-keep public class * extends androidx.glance.appwidget.action.ActionCallback { <init>(); }
 -keepnames class * extends androidx.glance.appwidget.GlanceAppWidget
 -keepclassmembers class * extends androidx.glance.appwidget.protobuf.GeneratedMessageLite {
     <fields>;

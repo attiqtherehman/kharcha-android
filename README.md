@@ -230,6 +230,13 @@ the deprecated `android:allowBackup` attribute, and the two "newer Gradle/AGP av
 
 ## Verified on a device
 
+**Signed release build (16 Oct 2026)** on the same Galaxy A55: the R8-minified, release-signed APK
+(`assembleRelease`, 4 MB) installed over USB, started cleanly, recorded a Rs 250 quick-entry expense,
+pinned the Quick Expense widget through the system dialog, saved a Rs 200 preset from the widget with
+the "Saved ✓" flash (this is what caught the missing `ActionCallback` constructor keep rule now in
+`proguard-rules.pro`), and wrote `kharcha-backup-2026-10-16.zip` with a well-formed manifest and both
+transactions. `logcat -b crash` stayed empty.
+
 Checked on 15 Oct 2026 on a Samsung Galaxy A55 (Android 16, One UI) over USB with the debug build.
 `logcat -b crash` stayed empty for the whole session.
 

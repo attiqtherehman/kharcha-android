@@ -211,8 +211,22 @@ ledger, transactional rollback, recurrence clamping and idempotent materialisati
 the reminder scheduler (single alarm, watermark, catch-up), CSV escaping/import and XLSX output,
 backup round trip, invalid-archive rejection and merge policies. 70 tests pass locally on JDK 21
 with Robolectric SDK 36; `app/build.gradle.kts` adds the `--add-opens` flags Robolectric needs on
-Java 17+. Instrumented tests in `app/src/androidTest` (Room migration smoke test, quick-entry
-end-to-end) run on a connected device with `./gradlew connectedDebugAndroidTest`.
+Java 17+.
+
+Instrumented tests in `app/src/androidTest` (Room migration smoke test, quick-entry end-to-end) run
+on a connected device with `./gradlew connectedDebugAndroidTest`. Both passed on 16 Oct 2026 on the
+Samsung Galaxy A55 (Android 16). The migration test opens the exported v1 schema from `app/schemas`
+(the Room Gradle plugin copies it into the test APK's assets) and validates it against the current
+entities and views. The quick-entry test seeds the default accounts and categories, launches
+`QuickEntryActivity`, types 250 on the keypad, taps *Save & add another* and finds the Rs 250 expense
+in the database. It seeds before launching because the screen reads the account list once at
+start-up, and it shows the activity over the lock screen and wakes the display, so the phone does
+not have to be unlocked while the suite runs.
+
+`./gradlew lintDebug` passes with no errors (report in `app/build/reports/lint-results-debug.html`).
+It still lists 57 warnings, all left on purpose: 30 unused strings, 15 strings that could become
+plurals, 9 widget-metadata attributes that only apply from API 28/31 and are harmless below that,
+the deprecated `android:allowBackup` attribute, and the two "newer Gradle/AGP available" notices.
 
 ## Verified on a device
 

@@ -82,8 +82,8 @@ fun SectionHeader(title: String, modifier: Modifier = Modifier, action: (@Compos
 fun EmptyState(
     icon: ImageVector,
     title: String,
-    message: String? = null,
     modifier: Modifier = Modifier,
+    message: String? = null,
     actionLabel: String? = null,
     onAction: (() -> Unit)? = null,
 ) {

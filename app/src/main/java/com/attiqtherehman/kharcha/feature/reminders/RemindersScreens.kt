@@ -52,7 +52,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -294,7 +294,7 @@ fun ReminderDetailScreen(onBack: () -> Unit, onEdit: (String) -> Unit, viewModel
                 }
                 state.categoryName?.let { LabelValueRow(stringResource(R.string.transaction_category), it) }
                 r.notes?.let { LabelValueRow(stringResource(R.string.transaction_notes), it) }
-                val res = LocalContext.current.resources
+                val res = LocalResources.current
                 LabelValueRow(stringResource(R.string.reminder_advance), r.advanceDays.joinToString(", ") { if (it == 0) res.getString(R.string.reminder_advance_on_day) else res.getString(R.string.reminder_advance_days_before, it) })
             }
             item { SectionHeader(stringResource(R.string.reminder_payment_history)) }

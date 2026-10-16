@@ -1,6 +1,7 @@
 package com.attiqtherehman.kharcha.notifications
 
 import android.Manifest
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -72,7 +73,7 @@ class ReminderNotifier @Inject constructor(@ApplicationContext private val conte
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()
-        NotificationManagerCompat.from(context).notify(NotificationIds.DAILY_ID, notification)
+        post(null, NotificationIds.DAILY_ID, notification)
     }
 
     fun cancelDailyReminder() = NotificationManagerCompat.from(context).cancel(NotificationIds.DAILY_ID)
@@ -103,7 +104,7 @@ class ReminderNotifier @Inject constructor(@ApplicationContext private val conte
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
         reminder.amount?.let { builder.setContentText(context.getString(R.string.bill_notification_text, MoneyFormatter.format(it, currency))) }
-        NotificationManagerCompat.from(context).notify(NotificationIds.billTag(reminder.id, offsetDays), NotificationIds.BILL_ID, builder.build())
+        post(NotificationIds.billTag(reminder.id, offsetDays), NotificationIds.BILL_ID, builder.build())
     }
 
     fun cancelBillReminders(reminderId: String, offsets: List<Int>) {
@@ -121,6 +122,19 @@ class ReminderNotifier @Inject constructor(@ApplicationContext private val conte
             .setContentIntent(open)
             .setAutoCancel(true)
             .build()
-        NotificationManagerCompat.from(context).notify("budget:$title", NotificationIds.BUDGET_ID, notification)
+        post("budget:$title", NotificationIds.BUDGET_ID, notification)
+    }
+
+    /**
+     * Every caller is already gated by [notificationsAllowed], but lint only trusts a permission
+     * check that sits in the same method as the `notify` call, so it is repeated here.
+     */
+    private fun post(tag: String?, id: Int, notification: Notification) {
+        if (Build.VERSION.SDK_INT >= 33 &&
+            ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        NotificationManagerCompat.from(context).notify(tag, id, notification)
     }
 }

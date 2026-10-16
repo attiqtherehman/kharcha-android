@@ -37,6 +37,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -238,7 +239,7 @@ private fun CategoryRow(
 @Composable
 private fun CategoryEditDialog(existing: Category?, onConfirm: (String, Long, String, Boolean) -> Unit, onDismiss: () -> Unit) {
     var name by remember { mutableStateOf(existing?.name ?: "") }
-    var color by remember { mutableStateOf(existing?.color?.toLong()?.and(0xFFFFFFFFL) ?: DefaultData.palette.first()) }
+    var color by remember { mutableLongStateOf(existing?.color?.toLong()?.and(0xFFFFFFFFL) ?: DefaultData.palette.first()) }
     var icon by remember { mutableStateOf(existing?.icon ?: "more") }
     var favorite by remember { mutableStateOf(existing?.isFavorite ?: false) }
     var error by remember { mutableStateOf(false) }

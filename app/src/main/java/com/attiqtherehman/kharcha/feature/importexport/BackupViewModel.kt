@@ -25,6 +25,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.OutputStream
 import javax.inject.Inject
 
 sealed interface BackupUiState {
@@ -103,10 +104,14 @@ class BackupViewModel @Inject constructor(
 
     fun reset() { job?.cancel(); _state.value = BackupUiState.Idle }
 
-    private suspend fun openForWrite(uri: Uri) = withContext(io) {
-        runCatching { context.contentResolver.openOutputStream(uri, "wt") }.getOrNull()
-            ?: context.contentResolver.openOutputStream(uri)
-            ?: throw IllegalStateException("cannot write to the selected location")
+    private suspend fun openForWrite(uri: Uri): OutputStream = withContext(io) {
+        val resolver = context.contentResolver
+        // "wt" truncates an existing document; providers that reject that mode get the default one.
+        val truncating = runCatching { resolver.openOutputStream(uri, "wt") }.getOrNull()
+        if (truncating != null) return@withContext truncating
+        val fallback = resolver.openOutputStream(uri)
+        if (fallback != null) return@withContext fallback
+        throw IllegalStateException("cannot write to the selected location")
     }
 
     suspend fun lastBackup(): Long? = settings.settings.first().lastBackupAt

@@ -21,7 +21,7 @@ class CsvWriter(private val writer: Writer) {
     fun flush() = writer.flush()
 
     companion object {
-        const val BOM = "﻿"
+        const val BOM = "\uFEFF"
 
         fun open(out: OutputStream): CsvWriter {
             val w = out.bufferedWriter(Charsets.UTF_8)

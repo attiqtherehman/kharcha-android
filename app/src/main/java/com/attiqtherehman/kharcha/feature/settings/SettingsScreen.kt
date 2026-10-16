@@ -2,7 +2,6 @@ package com.attiqtherehman.kharcha.feature.settings
 
 import android.Manifest
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -40,8 +39,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -58,7 +59,6 @@ import com.attiqtherehman.kharcha.ui.theme.ThemeMode
 import java.time.DayOfWeek
 import java.time.ZoneId
 import java.time.format.TextStyle
-import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,6 +77,7 @@ fun SettingsScreen(
     var pickWeekStart by remember { mutableStateOf(false) }
     val s = state.settings
     val st = state.reminderStatus
+    val locale = LocalLocale.current.platformLocale
 
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event -> if (event == Lifecycle.Event.ON_RESUME) viewModel.refreshStatus() }
@@ -106,7 +107,7 @@ fun SettingsScreen(
             SettingRow(stringResource(R.string.settings_number_grouping), stringResource(if (s.numberGrouping == NumberGrouping.SOUTH_ASIAN) R.string.settings_grouping_south_asian else R.string.settings_grouping_standard)) {
                 viewModel.setNumberGrouping(if (s.numberGrouping == NumberGrouping.SOUTH_ASIAN) NumberGrouping.STANDARD else NumberGrouping.SOUTH_ASIAN)
             }
-            SettingRow(stringResource(R.string.settings_week_start), s.weekStart.getDisplayName(TextStyle.FULL, Locale.getDefault())) { pickWeekStart = true }
+            SettingRow(stringResource(R.string.settings_week_start), s.weekStart.getDisplayName(TextStyle.FULL, locale)) { pickWeekStart = true }
             SettingRow(
                 stringResource(R.string.settings_theme),
                 stringResource(when (s.themeMode) { ThemeMode.SYSTEM -> R.string.settings_theme_system; ThemeMode.LIGHT -> R.string.settings_theme_light; ThemeMode.DARK -> R.string.settings_theme_dark }),
@@ -130,7 +131,7 @@ fun SettingsScreen(
                     text = stringResource(if (st.exactAlarmsAllowed) R.string.settings_exact_alarms_allowed else R.string.settings_exact_alarms_denied),
                     onClick = {
                         runCatching {
-                            context.startActivity(Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, Uri.parse("package:${context.packageName}")).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                            context.startActivity(Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, "package:${context.packageName}".toUri()).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
                         }
                     },
                 )
@@ -171,7 +172,7 @@ fun SettingsScreen(
         ChoiceDialog(title = stringResource(R.string.settings_base_currency), options = CurrencyInfo.all.map { it.code to "${it.code} · ${it.displayName}" }, selected = s.baseCurrency, onSelect = { viewModel.setBaseCurrency(it); pickCurrency = false }, onDismiss = { pickCurrency = false })
     }
     if (pickWeekStart) {
-        ChoiceDialog(title = stringResource(R.string.settings_week_start), options = listOf(DayOfWeek.MONDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY).map { it.name to it.getDisplayName(TextStyle.FULL, Locale.getDefault()) }, selected = s.weekStart.name, onSelect = { viewModel.setWeekStart(DayOfWeek.valueOf(it)); pickWeekStart = false }, onDismiss = { pickWeekStart = false })
+        ChoiceDialog(title = stringResource(R.string.settings_week_start), options = listOf(DayOfWeek.MONDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY).map { it.name to it.getDisplayName(TextStyle.FULL, locale) }, selected = s.weekStart.name, onSelect = { viewModel.setWeekStart(DayOfWeek.valueOf(it)); pickWeekStart = false }, onDismiss = { pickWeekStart = false })
     }
 }
 

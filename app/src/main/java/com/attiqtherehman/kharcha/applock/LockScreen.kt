@@ -30,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -65,6 +66,7 @@ fun showBiometricPrompt(activity: FragmentActivity, title: String, subtitle: Str
 @Composable
 fun LockScreen(manager: AppLockManager, modifier: Modifier = Modifier) {
     val context = LocalContext.current
+    val resources = LocalResources.current
     val activity = context as? FragmentActivity
     val settings by manager.settings.collectAsStateWithLifecycle(initialValue = AppLockSettings())
     val scope = rememberCoroutineScope()
@@ -107,8 +109,8 @@ fun LockScreen(manager: AppLockManager, modifier: Modifier = Modifier) {
                             when (val r = manager.tryPin(pin)) {
                                 AppLockManager.PinResult.Ok -> Unit
                                 is AppLockManager.PinResult.Wrong -> { message = "$wrongPin (${r.attemptsLeft})"; pin = "" }
-                                is AppLockManager.PinResult.LockedOut -> { message = context.getString(R.string.lock_locked_out, r.secondsLeft); pin = "" }
-                                AppLockManager.PinResult.KeyUnavailable -> message = context.getString(R.string.lock_recovery_hint)
+                                is AppLockManager.PinResult.LockedOut -> { message = resources.getString(R.string.lock_locked_out, r.secondsLeft); pin = "" }
+                                AppLockManager.PinResult.KeyUnavailable -> message = resources.getString(R.string.lock_recovery_hint)
                             }
                         }
                     },

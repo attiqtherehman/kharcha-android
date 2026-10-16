@@ -7,6 +7,30 @@ plugins {
     alias(libs.plugins.room)
 }
 
+// Release signing comes from the environment so that no key material lives in the repository:
+//   KHARCHA_KEYSTORE           path to the .jks / .p12 keystore
+//   KHARCHA_KEYSTORE_PASSWORD  keystore password
+//   KHARCHA_KEY_ALIAS          key alias inside the keystore
+//   KHARCHA_KEY_PASSWORD       key password (same as the store password for PKCS12 keystores)
+// When KHARCHA_KEYSTORE is unset, assembleRelease still works and yields app-release-unsigned.apk.
+val releaseKeystorePath: String? =
+    providers.environmentVariable("KHARCHA_KEYSTORE").orNull?.takeIf { it.isNotBlank() }
+val releaseSigningAvailable = releaseKeystorePath != null
+
+if (releaseSigningAvailable) {
+    val missing = listOf("KHARCHA_KEYSTORE_PASSWORD", "KHARCHA_KEY_ALIAS", "KHARCHA_KEY_PASSWORD")
+        .filter { providers.environmentVariable(it).orNull.isNullOrBlank() }
+    check(missing.isEmpty()) {
+        "KHARCHA_KEYSTORE is set but ${missing.joinToString()} ${if (missing.size == 1) "is" else "are"} not. " +
+            "Set all four KHARCHA_* variables, or unset KHARCHA_KEYSTORE to build an unsigned release."
+    }
+    check(file(releaseKeystorePath!!).isFile) {
+        "KHARCHA_KEYSTORE points to '$releaseKeystorePath', which is not a file."
+    }
+} else if (gradle.startParameter.taskNames.any { it.contains("release", ignoreCase = true) }) {
+    logger.lifecycle("Release signing is not configured (KHARCHA_KEYSTORE is unset): the release APK will be unsigned.")
+}
+
 android {
     namespace = "com.attiqtherehman.kharcha"
     compileSdk = 37
@@ -20,11 +44,24 @@ android {
         testInstrumentationRunner = "com.attiqtherehman.kharcha.HiltTestRunner"
     }
 
+    signingConfigs {
+        if (releaseSigningAvailable) {
+            create("release") {
+                storeFile = file(releaseKeystorePath!!)
+                storePassword = providers.environmentVariable("KHARCHA_KEYSTORE_PASSWORD").get()
+                keyAlias = providers.environmentVariable("KHARCHA_KEY_ALIAS").get()
+                keyPassword = providers.environmentVariable("KHARCHA_KEY_PASSWORD").get()
+            }
+        }
+    }
+
     buildTypes {
         release {
+            // R8: shrink, optimise and obfuscate; the keep rules live in proguard-rules.pro.
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = if (releaseSigningAvailable) signingConfigs.getByName("release") else null
         }
     }
 
@@ -51,6 +88,13 @@ android {
     testOptions {
         unitTests.isIncludeAndroidResources = true
         unitTests.isReturnDefaultValues = true
+    }
+
+    lint {
+        // lintVitalAnalyzeRelease crashes inside lint's Kotlin K2 resolver on BackupScreen.kt
+        // ("Error during resolving call class KtNameReferenceExpression"), which would block every
+        // release build. Lint still runs on demand with `gradle lint`; release builds do not wait for it.
+        checkReleaseBuilds = false
     }
 }
 

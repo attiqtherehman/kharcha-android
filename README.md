@@ -39,7 +39,76 @@ Requirements: JDK 17+ (21 recommended), Android SDK with platform 37 (Android 17
 ```
 
 GitHub Actions builds every push (`.github/workflows/android.yml`) and uploads the debug APK as an
-artifact, so you can also sideload the latest build from the Actions tab.
+artifact, so you can also sideload the latest build from the Actions tab. Pushing a `v*` tag
+additionally publishes a signed release APK (see *Cutting a release* below).
+
+### Signed release builds
+
+Release builds are shrunk and obfuscated by R8 (`app/proguard-rules.pro` holds the keep rules for
+Room, Hilt, WorkManager, Glance and kotlinx.serialization) and signed with a key that is **never**
+stored in the repository. `app/build.gradle.kts` reads it from four environment variables:
+
+| Variable | Meaning |
+|---|---|
+| `KHARCHA_KEYSTORE` | path to the release keystore (`.jks`, PKCS12) |
+| `KHARCHA_KEYSTORE_PASSWORD` | keystore password |
+| `KHARCHA_KEY_ALIAS` | alias of the signing key inside the keystore |
+| `KHARCHA_KEY_PASSWORD` | key password (a PKCS12 keystore uses the store password here too) |
+
+With all four set, `./gradlew assembleRelease` writes a signed
+`app/build/outputs/apk/release/app-release.apk` and `app/build/outputs/mapping/release/mapping.txt`
+(keep the mapping with the release; it de-obfuscates stack traces). With `KHARCHA_KEYSTORE` unset
+the same command still succeeds and produces `app-release-unsigned.apk`, so CI and fresh clones
+build without secrets. Setting `KHARCHA_KEYSTORE` without the other three fails fast with a message
+that names the missing variables.
+
+Create a keystore once with the JDK's `keytool`, outside the repository. Back up the file and its
+password: losing them means a new app identity, and installed copies can no longer be updated in
+place.
+
+```bash
+keytool -genkeypair -v -keystore /somewhere/outside/the/repo/kharcha-release.jks -storetype PKCS12 \
+  -alias kharcha -keyalg RSA -keysize 4096 -validity 10950 -dname "CN=Kharcha, O=<you>, C=PK"
+```
+
+`*.jks` and `*.keystore` are git-ignored as a safety net. Debug and release builds carry different
+signatures, so uninstall one before installing the other (`adb uninstall com.attiqtherehman.kharcha`
+also deletes the app's data; create a backup file first).
+
+### Cutting a release
+
+Pushing a tag that starts with `v` runs the `release` job in `.github/workflows/android.yml`. After
+the unit tests pass it rebuilds the signed APK from four **repository secrets with the same names as
+the environment variables**, checks the signature with `apksigner`, and attaches
+`kharcha-<tag>.apk`, `kharcha-<tag>-mapping.txt` and `SHA256SUMS.txt` to a GitHub Release with
+generated notes. A tag containing `-` (for example `v1.1.0-beta1`) is marked as a pre-release.
+Because secrets are text, `KHARCHA_KEYSTORE` holds the **base64 of the keystore file**. With the
+four variables set in your shell, `gh` sets the secrets without pasting any value:
+
+```powershell
+# PowerShell
+gh secret set KHARCHA_KEYSTORE --body ([Convert]::ToBase64String([IO.File]::ReadAllBytes($env:KHARCHA_KEYSTORE)))
+gh secret set KHARCHA_KEYSTORE_PASSWORD --body $env:KHARCHA_KEYSTORE_PASSWORD
+gh secret set KHARCHA_KEY_ALIAS --body $env:KHARCHA_KEY_ALIAS
+gh secret set KHARCHA_KEY_PASSWORD --body $env:KHARCHA_KEY_PASSWORD
+```
+
+```bash
+# bash
+gh secret set KHARCHA_KEYSTORE --body "$(base64 -w0 "$KHARCHA_KEYSTORE")"
+gh secret set KHARCHA_KEYSTORE_PASSWORD --body "$KHARCHA_KEYSTORE_PASSWORD"
+gh secret set KHARCHA_KEY_ALIAS --body "$KHARCHA_KEY_ALIAS"
+gh secret set KHARCHA_KEY_PASSWORD --body "$KHARCHA_KEY_PASSWORD"
+```
+
+Then, for every release:
+
+1. Bump `versionCode` (always by one) and `versionName` in `app/build.gradle.kts`, commit, push to
+   `main` and wait for CI to go green.
+2. Tag that commit and push the tag: `git tag v1.0.0 && git push origin v1.0.0`.
+3. Watch the *Android CI* run for the tag; the release appears under *Releases* a few minutes later.
+   Install the APK directly or share the release link. A release build updates in place over any
+   earlier release build.
 
 ### Notes for this development machine (Windows, no admin)
 
@@ -56,6 +125,14 @@ Three machine-specific workarounds are in place and are *not* part of the reposi
   init script (`%USERPROFILE%\.gradle\init.d\local-mirror.init.gradle.kts`) prepends to every
   repository list. Robolectric's `android-all-instrumented` jar for SDK 36 was pre-placed in
   `%USERPROFILE%\.m2\repository` for the same reason. None of this affects CI or other machines.
+- The release keystore and a PowerShell script that exports the four `KHARCHA_*` variables live in
+  `C:\Users\<user>\Android\keys` (outside the repository). Dot-source the script, then run
+  `gradle.bat assembleRelease`:
+
+  ```powershell
+  . C:\Users\<user>\Android\keys\kharcha-release-env.ps1
+  C:\Users\<user>\Android\gradle\gradle-9.6.0\bin\gradle.bat assembleRelease
+  ```
 
 ## Architecture
 
